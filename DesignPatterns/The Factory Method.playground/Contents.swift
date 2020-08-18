@@ -95,3 +95,79 @@ struct ThemeFactory {
     }
 }
 
+protocol Human {
+    var name: String { get set }
+    
+    func run()
+    func eat()
+    func sleep()
+}
+
+class Soldier : Human {
+    var name: String
+    
+    init(name : String) {
+        self.name = name
+    }
+    
+    func run() {
+        print("soldier \(name) is running")
+    }
+    
+    func eat() {
+        print("soldier \(name) is eating")
+    }
+    
+    func sleep() {
+        print("soldier \(name) is sleeping")
+    }
+}
+
+class Civilian : Human {
+    
+    var name: String
+    
+    init(name : String) {
+        self.name = name
+    }
+    
+    func run() {
+        print("soldier \(name) is running")
+    }
+    
+    func eat() {
+        print("soldier \(name) is eating")
+    }
+    
+    func sleep() {
+        print("soldier \(name) is sleeping")
+    }
+}
+
+enum HumanTypes {
+    case Soldier
+    case Civilian
+}
+
+class HumanFactory {
+    
+    private static var sharedHumanFactory = HumanFactory()
+    
+    class func shared() -> HumanFactory {
+        return sharedHumanFactory
+    }
+    
+    func getHuman(humanType: HumanTypes, name: String) -> Human {
+        switch humanType {
+        case .Soldier:
+            return Soldier(name: name)
+        case .Civilian:
+            return Civilian(name: name)
+        }
+    }
+}
+
+let soldier = HumanFactory.shared().getHuman(humanType: .Soldier, name: "Joe")
+soldier.sleep()
+
+
