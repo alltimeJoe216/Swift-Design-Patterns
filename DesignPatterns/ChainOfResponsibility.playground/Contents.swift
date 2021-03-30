@@ -3,12 +3,8 @@ import UIKit
 /*
  The chain of responsibility design pattern organizes request processors in a chain.
  The request gets propagated through the chain until it reaches the end of the chain
- 
- 
- 
- 
- 
  */
+
 protocol RequestHandling {
     init(next: RequestHandling?)
     
@@ -34,11 +30,10 @@ final class Handler<T>: RequestHandling, CustomStringConvertible {
     }
     
     /*
-     
+    
      If the handler processes the request, we print a message to the console. Otherwise, we check if there’s a valid next handler in the chain. If nextHandler is nil, we print that we reached the end of the responder chain, and return.
      
      If nextHandler references a valid object, we print a log message telling that the current handler can’t handle the request, and we forward it to the next handler by calling its handle(request:) method.
-
      */
     
     func handle(request: Any) {
